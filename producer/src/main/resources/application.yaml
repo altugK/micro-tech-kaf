@@ -1,0 +1,21 @@
+spring:
+  data:
+    cassandra:
+      keyspace-name: '"kafeinKeyspace"'
+      port: '9042'
+      contact-points: cassandra
+      request:
+        timeout: 10000ms
+      schema-action: CREATE_IF_NOT_EXISTS
+  kafka:
+    consumer:
+      group-id: userManager
+    bootstrap-servers: localhost:29092
+  application:
+    name: '"user-manager"'
+  profiles:
+    active: '@activatedProperties@'
+server:
+  port: '8081'
+user:
+  topic: user
