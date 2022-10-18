@@ -6,6 +6,7 @@ import lombok.experimental.UtilityClass;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 @UtilityClass
 public class UserMapper {
@@ -14,8 +15,10 @@ public class UserMapper {
         if (Objects.isNull(userDto)) return new User();
 
         return User.builder()
+                .id(UUID.randomUUID())
                 .name(userDto.getName())
                 .surname(userDto.getSurname())
+                .followerList(userDto.getFollowerList())
                 .createdAt(LocalDateTime.now())
                 .build();
     }
@@ -26,6 +29,7 @@ public class UserMapper {
         return UserDto.builder()
                 .name(user.getName())
                 .surname(user.getSurname())
+                .followerList(user.getFollowerList())
                 .build();
     }
 }

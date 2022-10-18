@@ -5,13 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -19,10 +18,10 @@ import java.util.Set;
 @ToString
 @Builder
 @Table
-public class User {
+public class User implements Serializable {
 
     @PrimaryKey
-    private Integer id;
+    private UUID id;
 
     private String name;
 

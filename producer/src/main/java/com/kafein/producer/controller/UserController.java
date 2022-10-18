@@ -11,7 +11,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/user/v1")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public UserDto findById(@PathVariable UUID orderId) {
-        return UserMapper.tableToDto(this.userService.findById(orderId));
+    public UserDto findById(@PathVariable UUID userId) {
+        return UserMapper.tableToDto(this.userService.findById(userId));
     }
 
     @GetMapping
@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping
     public UserDto create(@RequestBody UserDto orderDto) {
-        return UserMapper.tableToDto(this.userService.send(UserMapper.dtoToTable(orderDto)));
+        return UserMapper.tableToDto(this.userService.create(UserMapper.dtoToTable(orderDto)));
     }
 
 

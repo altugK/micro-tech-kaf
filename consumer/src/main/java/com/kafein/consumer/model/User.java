@@ -1,22 +1,21 @@
 package com.kafein.consumer.model;
 
 import lombok.*;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-@Table
-public class User {
+@Deprecated
+public class User implements Serializable {
 
-    @PrimaryKey
-    private Integer id;
+    private UUID id;
 
     private String name;
 

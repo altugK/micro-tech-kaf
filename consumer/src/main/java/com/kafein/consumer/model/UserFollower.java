@@ -4,7 +4,9 @@ import lombok.*;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -12,13 +14,13 @@ import java.util.HashSet;
 @ToString
 @Builder
 @Table
-public class UserFollower {
+public class UserFollower implements Serializable {
 
     @PrimaryKey
-    private Integer id;
+    private UUID id;
 
-    private Integer userId;
+    private UUID userId;
 
-    private HashSet<Integer> followers;
+    private HashSet<UUID> followers;
 
 }
