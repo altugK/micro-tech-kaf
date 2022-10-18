@@ -1,10 +1,14 @@
 package com.kafein.consumer.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Data
@@ -12,7 +16,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 @Builder
-@Deprecated
 public class User implements Serializable {
 
     private UUID id;
@@ -21,7 +24,7 @@ public class User implements Serializable {
 
     private String surname;
 
-    private HashSet<Integer> followerList;
+    private ArrayList<UUID> followerList;
 
     private LocalDateTime createdAt;
 

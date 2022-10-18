@@ -1,15 +1,12 @@
 package com.kafein.consumer.service;
 
-import com.kafein.consumer.errors.CustomException;
 import com.kafein.consumer.model.User;
 import com.kafein.consumer.model.UserFollower;
 import com.kafein.consumer.repository.UserFollowerRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -21,18 +18,30 @@ public class UserFollowerService {
         this.userFollowerRepository = userFollowerRepository;
     }
 
-    public UserFollower findById(UUID userFollowerId) {
-        return this.userFollowerRepository.findById(userFollowerId).orElseThrow(
-                () -> new CustomException("UserFollower not found", HttpStatus.NOT_FOUND));
+    public Optional<UserFollower> findByUserId(UUID userId) {
+        return this.userFollowerRepository.findByUserId(userId);
     }
 
-    public List<UserFollower> findAll() {
-        return this.userFollowerRepository.findAll();
-    }
+    public void createOrUpdate(User user) {
+        if (user.getFollowerList().isEmpty()) return;
 
-    public void createOrUpdate(String user) {
-        //TODO: Implement this method
-        log.info("UserFollower should be updated with new user followers: {}", user);
+        Set<UUID> followedList = new HashSet<>(user.getFollowerList());
+
+        followedList.forEach(followedId -> {
+            UserFollower userFollower = findByUserId(followedId)
+                    .orElse(UserFollower.builder()
+                            .userId(followedId)
+                            .followers(new ArrayList<>())
+                            .build());
+
+            userFollower.getFollowers().add(user.getId());
+
+            this.userFollowerRepository.save(userFollower);
+
+            log.info("User: " + followedId + " is followed by: " + user.getId());
+        });
+
+
     }
 
 }

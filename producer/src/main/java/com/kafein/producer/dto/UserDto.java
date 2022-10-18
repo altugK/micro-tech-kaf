@@ -5,7 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -15,6 +16,6 @@ public class UserDto {
 
     private String name;
     private String surname;
-    private HashSet<Integer> followerList;
+    private ArrayList<UUID> followerList;
 
 }

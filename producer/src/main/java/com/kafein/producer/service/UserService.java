@@ -17,11 +17,11 @@ public class UserService {
 
     private static final String USER_TOPIC = "user";
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, User> kafkaTemplate;
 
     private final UserRepository userRepository;
 
-    public UserService(KafkaTemplate<String, String> kafkaTemplate, UserRepository userRepository) {
+    public UserService(KafkaTemplate<String, User> kafkaTemplate, UserRepository userRepository) {
         this.kafkaTemplate = kafkaTemplate;
         this.userRepository = userRepository;
     }
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public User send(User user) {
-        kafkaTemplate.send(USER_TOPIC, user.getId().toString(), user.toString());
+        kafkaTemplate.send(USER_TOPIC, user.getId().toString(), user);
         return user;
     }
 
