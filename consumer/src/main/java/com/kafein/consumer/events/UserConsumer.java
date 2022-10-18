@@ -1,5 +1,6 @@
 package com.kafein.consumer.events;
 
+import com.kafein.consumer.model.User;
 import com.kafein.consumer.service.UserFollowerService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -16,7 +17,7 @@ public class UserConsumer {
     }
 
     @KafkaListener(topics = "user", groupId = "user-group")
-    public void consumer(final ConsumerRecord<String, String> consumerRecord) {
+    public void consumer(final ConsumerRecord<String, User> consumerRecord) {
         log.info("1 handle with followers: {}", consumerRecord.key());
         userFollowerService.createOrUpdate(consumerRecord.value());
     }

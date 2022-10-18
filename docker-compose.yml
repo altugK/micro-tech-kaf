@@ -1,5 +1,4 @@
 version: "4.12"
-
 services:
   zookeeper:
     image: "docker.io/bitnami/zookeeper:latest"
@@ -48,11 +47,17 @@ services:
     restart: always
     volumes:
       - ./out/cassandra_data:/var/lib/cassandra
+    healthcheck:
+        test: ["CMD", "cqlsh", "-u cassandra", "-p cassandra" ,"-e describe keyspaces"]
+        interval: 15s
+        timeout: 10s
+        retries: 10
   cassandra-load-keyspace:
     container_name: cassandra-load-keyspace
     image: cassandra
     depends_on:
-      - cassandra
+      cassandra:
+        condition: service_healthy
     volumes:
       - ./keyspace.cql:/keyspace.cql
     command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /keyspace.cql"

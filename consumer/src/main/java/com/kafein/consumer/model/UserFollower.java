@@ -1,11 +1,16 @@
 package com.kafein.consumer.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Data
@@ -17,10 +22,8 @@ import java.util.UUID;
 public class UserFollower implements Serializable {
 
     @PrimaryKey
-    private UUID id;
-
     private UUID userId;
 
-    private HashSet<UUID> followers;
+    private ArrayList<UUID> followers;
 
 }

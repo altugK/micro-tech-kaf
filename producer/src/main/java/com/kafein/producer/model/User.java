@@ -5,11 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+
 import org.springframework.data.cassandra.core.mapping.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Data
@@ -27,7 +28,7 @@ public class User implements Serializable {
 
     private String surname;
 
-    private HashSet<Integer> followerList;
+    private ArrayList<UUID> followerList;
 
     private LocalDateTime createdAt;
 
