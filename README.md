@@ -1,5 +1,17 @@
+```json
+docker-compose up
+```
+```json
+any services error try jars:
+
+  /cd jars 
+  java -jar producer.jar
+  java -jar consumer.jar
+```
 
 ## [Click for Swagger Ui](http://localhost:8081/swagger-ui/index.html#/)
+## [Kafka Ui](http://localhost:9090/)
+
 
 ## Features
 1 - Find All Users
@@ -132,3 +144,6 @@ Content-Type: application/json
         ]
 }
 ```
+## Contact
+- [LinkedIn](https://www.linkedin.com/in/altugkarakayali/)
+- E-Mail: **altugkarakayali@gmail.com**
