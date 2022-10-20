@@ -16,7 +16,7 @@ public class ProducerApplication {
 
     @Bean
     public OpenAPI customOpenApi(@Value("${application-description}") String description,
-                                  @Value("${application-version}") String version) {
+                                 @Value("${application-version}") String version) {
         return new OpenAPI()
                 .info(new Info()
                         .title("User Follower API")

@@ -8,9 +8,12 @@ import lombok.Builder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
-
+/**
+ *  Producer servisin sorumlu olduğu tablo deseni Pojo olarak tutuluyor.
+ * @author altugKarakayalı
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,8 +27,11 @@ public class User implements Serializable {
 
     private String surname;
 
-    private ArrayList<UUID> followerList;
+    private Set<UUID> followedList;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdDate;
 
+    public boolean isAnyoneFollowed() {
+        return this.followedList != null && !this.followedList.isEmpty();
+    }
 }

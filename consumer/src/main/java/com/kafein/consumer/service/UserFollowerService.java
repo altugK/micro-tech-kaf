@@ -6,8 +6,16 @@ import com.kafein.consumer.repository.UserFollowerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.HashSet;
 
+/**
+ * {@link UserFollower} business logic işlemleri için kullanılacaktır.
+ *
+ * @author altugKarakayalı
+ */
 @Service
 @Slf4j
 public class UserFollowerService {
@@ -22,25 +30,30 @@ public class UserFollowerService {
         return this.userFollowerRepository.findByUserId(userId);
     }
 
+    /**
+     * Takip edilenlen kullanıcıların takip edenden kayıt edildiği method. Kafka'dan gelen {@link User} ile işlem yapılır.
+     */
     public void createOrUpdate(User user) {
-        if (user.getFollowerList().isEmpty()) return;
+        if (!user.isAnyoneFollowed()) {
+            log.info("User is not following anyone. userId: {}", user.getId());
+            return;
+        }
 
-        Set<UUID> followedList = new HashSet<>(user.getFollowerList());
+        Set<UUID> followedList = new HashSet<>(user.getFollowedList());
 
         followedList.forEach(followedId -> {
             UserFollower userFollower = findByUserId(followedId)
                     .orElse(UserFollower.builder()
                             .userId(followedId)
-                            .followers(new ArrayList<>())
+                            .followerList(new HashSet<>())
                             .build());
 
-            userFollower.getFollowers().add(user.getId());
+            userFollower.getFollowerList().add(user.getId());
 
             this.userFollowerRepository.save(userFollower);
 
             log.info("User: " + followedId + " is followed by: " + user.getId());
         });
-
 
     }
 

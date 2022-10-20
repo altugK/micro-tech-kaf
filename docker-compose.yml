@@ -55,16 +55,33 @@ services:
   cassandra-load-keyspace:
     container_name: cassandra-load-keyspace
     image: cassandra
-    depends_on:
-      cassandra:
-        condition: service_healthy
     volumes:
       - ./keyspace.cql:/keyspace.cql
     command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /keyspace.cql"
+  producer:
+    build: ./producer
+    links:
+      - kafka
+      - cassandra
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_CASSANDRA_CONTACTPOINTS: cassandra
+  consumer:
+    build: ./consumer
+    links:
+      - kafka
+      - cassandra
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_CASSANDRA_CONTACTPOINTS: cassandra
 volumes:
   zookeeper_data:
     driver: local
   kafka_data:
     driver: local
   cassandra_data:
+    driver: local
+  producer_data:
+    driver: local
+  consumer_data:
     driver: local

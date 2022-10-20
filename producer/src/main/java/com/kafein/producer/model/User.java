@@ -6,13 +6,19 @@ import lombok.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
-import org.springframework.data.cassandra.core.mapping.*;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Producer servisin sorumlu olduğu tablo.Takip edilenlerin listesini tutar.
+ *
+ * @author altugKarakayalı
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,8 +34,11 @@ public class User implements Serializable {
 
     private String surname;
 
-    private ArrayList<UUID> followerList;
+    private Set<UUID> followedList;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdDate;
 
+    public boolean isAnyoneFollowed() {
+        return this.followedList != null && !this.followedList.isEmpty();
+    }
 }

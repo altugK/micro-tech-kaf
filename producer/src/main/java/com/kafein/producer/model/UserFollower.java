@@ -1,4 +1,4 @@
-package com.kafein.consumer.model;
+package com.kafein.producer.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,12 @@ import lombok.Builder;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
+
 /**
- *  Consumur servisin sorumlu olduğu tablodur. Kullanıcıların takipçilerini tutar.
+ * Consumerın sorumlu olduğu tablo. Response mapping için yaratıldı.
+ *
  * @author altugKarakayalı
  */
 @Data
@@ -22,11 +23,16 @@ import java.util.UUID;
 @ToString
 @Builder
 @Table
-public class UserFollower implements Serializable {
+public class UserFollower {
 
     @PrimaryKey
     private UUID userId;
 
     private Set<UUID> followerList;
+
+    public boolean isAnyoneFollowed() {
+        return this.followerList != null && !this.followerList.isEmpty();
+    }
+
 
 }

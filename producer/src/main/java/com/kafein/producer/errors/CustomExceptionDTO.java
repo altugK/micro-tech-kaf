@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
-
+/**
+ *  Hata deseni.
+ */
 @Data
 @AllArgsConstructor
 public class CustomExceptionDTO {
