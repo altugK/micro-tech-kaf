@@ -2,7 +2,7 @@
 docker-compose up
 ```
 ```json
-any services error try jars:
+if any services trow error try jars:
 
   /cd jars 
   java -jar producer.jar
