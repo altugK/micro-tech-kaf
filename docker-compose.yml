@@ -57,23 +57,40 @@ services:
     image: cassandra
     volumes:
       - ./keyspace.cql:/keyspace.cql
+    depends_on:
+      cassandra:
+        condition: service_healthy
     command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /keyspace.cql"
   producer:
     build: ./producer
+    ports:
+      - "8081:8081"
+    expose:
+      - "8081"
     links:
       - kafka
       - cassandra
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_CASSANDRA_CONTACTPOINTS: cassandra
+    depends_on:
+      cassandra:
+        condition: service_healthy
   consumer:
     build: ./consumer
+    ports:
+      - "8082:8082"
+    expose:
+      - "8082"
     links:
       - kafka
       - cassandra
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_CASSANDRA_CONTACTPOINTS: cassandra
+    depends_on:
+      cassandra:
+        condition: service_healthy
 volumes:
   zookeeper_data:
     driver: local
