@@ -70,9 +70,6 @@ services:
     links:
       - kafka
       - cassandra
-    environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      SPRING_CASSANDRA_CONTACTPOINTS: cassandra
     depends_on:
       cassandra:
         condition: service_healthy
@@ -85,9 +82,6 @@ services:
     links:
       - kafka
       - cassandra
-    environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      SPRING_CASSANDRA_CONTACTPOINTS: cassandra
     depends_on:
       cassandra:
         condition: service_healthy

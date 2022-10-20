@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.kafein</groupId>
     <artifactId>producer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <name>producer</name>
     <description>Producer service for kafein-tech-backend-case</description>
     <packaging>jar</packaging>
