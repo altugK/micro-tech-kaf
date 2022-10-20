@@ -1,10 +1,23 @@
-```json
-docker-compose up
+
+### 🔨 Run the App
+
+<b>1 )</b> Install <b>Docker Desktop</b>. Here is the installation <b>link</b> : https://docs.docker.com/docker-for-windows/install/
+
+<b>2 )</b> Open <b>Terminal</b> under <b>resources</b> folder to run <b>Docker</b> Container
 ```
+    docker-compose up -d
+```
+<b>3 )</b> Open <b>[Swagger Ui](http://localhost:8081/swagger-ui/index.html#/)</b> in the Browser and Try it 
 
-## [Click for Swagger Ui](http://localhost:8081/swagger-ui/index.html#/)
-## [Kafka Ui](http://localhost:9090/)
+<b>4 )</b> Open <b>[Kafka Ui](http://localhost:9090/)</b> in the Browser 
 
+
+### Used Dependencies
+* Spring Boot Web
+* Kafka
+* Cassandra
+* Lombok
+* Swagger
 
 ## Features
 1 - Find All Users
