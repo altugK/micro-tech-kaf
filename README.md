@@ -134,8 +134,8 @@ Content-Type: application/json
 
 {
     "id": "9ef47520-ea5f-42d2-bec2-7820360e6db3",
-    "name": "Vlyım",
-    "surname": "Volıs",
+    "name": "William",
+    "surname": "Wallace",
     "followedList": [
     "c24131f8-61c6-401f-9b5f-58ad69587266",
     "cf4479d2-9b37-4a3a-b08c-176b7f90f5c3",
