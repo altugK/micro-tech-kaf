@@ -1,13 +1,6 @@
 ```json
 docker-compose up
 ```
-```json
-if any services trow error try jars:
-
-  /cd jars 
-  java -jar producer.jar
-  java -jar consumer.jar
-```
 
 ## [Click for Swagger Ui](http://localhost:8081/swagger-ui/index.html#/)
 ## [Kafka Ui](http://localhost:9090/)
